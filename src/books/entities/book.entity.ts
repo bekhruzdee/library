@@ -17,6 +17,6 @@ export class Book {
   @Column()
   genre: string;
 
-  @Column({ default: true  })
+  @Column({ type: `boolean`, default: true  })
   isAvailable: boolean;
 }

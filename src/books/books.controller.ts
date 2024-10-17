@@ -21,11 +21,6 @@ export class BooksController {
     return this.booksService.getAllBooks();
   }
 
-  @Get(':id')
-  getBookById(@Param('id') id: number) {
-    return this.booksService.getBookById(+id);
-  }
-
   @Post()
   addBook(@Body() createBookDto: CreateBookDto) {
     return this.booksService.addBook(createBookDto);

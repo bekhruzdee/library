@@ -16,14 +16,6 @@ export class BooksService {
     return this.booksRepository.find();
   }
 
-  async getBookById(id: number): Promise<Book> {
-    const book = await this.booksRepository.findOneBy({ id });
-    if (!book) {
-      throw new NotFoundException(`Book with ID ${id} not found`);
-    }
-    return book;
-  }
-
   async addBook(createBookDto: CreateBookDto): Promise<Book> {
     const newBook = this.booksRepository.create(createBookDto);
     return this.booksRepository.save(newBook);
@@ -40,16 +32,16 @@ export class BooksService {
     return this.booksRepository.save(book);
   }
 
-  async deleteBook(id: number): Promise<{message: string}> {
+  async deleteBook(id: number): Promise<{ message: string }> {
     const result = await this.booksRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Book with ID ${id} not found`);
     }
-    return { message: 'Delete Successfully'}
+    return { message: 'Delete Successfully' };
   }
 
   async findAvailableBooks(): Promise<Book[]> {
-    return  this.booksRepository.find({ where: { isAvailable: true } });
+    return this.booksRepository.find({ where: { isAvailable: true } });
   }
 
   async updateAvailability(id: number, isAvailable: boolean): Promise<Book> {
